@@ -15,8 +15,6 @@ class App {
   private loadRoutes(): void {
     this.express.use('/', router);
   }
-
-  
 }
 
 export default new App().express;

@@ -5,6 +5,8 @@ export class EventType {
   public message?: string;
   public service: string;
   public id: number;
+  public createdAt: Date;
+  public updatedAt: Date;
 
   constructor(id: number, name: string, time: Date, status: string, service: string, message?: string) {
     this.id = id;
@@ -13,5 +15,7 @@ export class EventType {
     this.status = status;
     this.message = message;
     this.service = service;
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
   }
 }
