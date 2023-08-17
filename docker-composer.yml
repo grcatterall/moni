@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=moni
+      - PGUSER=postgres
+    ports:
+      - '5432:5432'
+    command: -p 5432
+    healthcheck:
+      test: pg_isready -q -p 5432
+      interval: 8s
+      timeout: 1s
+      retries: 100
+      start_period: 20s
+    volumes: 
+      - db:/var/lib/postgresql/data
+    networks:
+      - moni-app-network
+
+  moni_app:
+    container_name: moni_app_backend
+    env_file:
+      - ".env"
+    build:
+      context: .
+      # target: builder
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - "./src:/app/src"
+      - "./package.json:/app/package.json"
+      - "./package-lock.json:/app/package-lock.json"
+    command: [ "npm", "run", "start:watch" ]
+    networks:
+      - moni-app-network
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  moni-app-network:
+    driver: bridge

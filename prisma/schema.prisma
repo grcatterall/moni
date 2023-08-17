@@ -7,13 +7,14 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Events {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(uuid())
   name      String
+  message   String
   service   Services @relation(fields: [serviceId], references: [name])
   serviceId String
   createdAt DateTime @default(now())
@@ -21,7 +22,7 @@ model Events {
 }
 
 model Services {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(uuid())
   name      String   @unique
   Events    Events[]
   createdAt DateTime @default(now())

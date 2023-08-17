@@ -1,5 +1,7 @@
 import { ModelInterface } from './ModelInterface';
 import { EventType } from '../type/EventType';
+import { v4 as uuidv4 } from 'uuid';
+
 
 export class Event implements ModelInterface {
   public name: string;
@@ -7,12 +9,12 @@ export class Event implements ModelInterface {
   public status: string;
   public message?: string;
   public service: string;
-  public id: number;
+  public id: string;
   public createdAt: Date;
   public updatedAt: Date;
 
   constructor(name: string, time: Date, status: string, service: string, message?: string, createdAt?: Date) {
-    this.id = Math.floor(Math.random() * (9999999 - 1000000) + 1000000);
+    this.id = uuidv4();
     this.name = name;
     this.time = time;
     this.status = status;
