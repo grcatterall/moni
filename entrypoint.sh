@@ -6,6 +6,8 @@ set -e
 if [ -n "$DATABASE_RUN_MIGRATIONS" ] && [ "$DATABASE_RUN_MIGRATIONS" = "true" ]; then
     echo "Running database migrations."
     npm run database:migrate
+
+    # npx prisma generate
 fi
 
 exec "$@"

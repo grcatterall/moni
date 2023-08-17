@@ -4,11 +4,11 @@ export class EventType {
   public status: string;
   public message?: string;
   public service: string;
-  public id: number;
+  public id: string;
   public createdAt: Date;
   public updatedAt: Date;
 
-  constructor(id: number, name: string, time: Date, status: string, service: string, message?: string) {
+  constructor(id: string, name: string, time: Date, status: string, service: string, message?: string) {
     this.id = id;
     this.name = name;
     this.time = time;

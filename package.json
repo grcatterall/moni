@@ -4,10 +4,12 @@
   "main": "index.js",
   "scripts": {
     "app:run": "docker-compose -f docker-composer.yml up",
+    "postinstall": "npm run prisma:generate && npm run build",
     "build": "rimraf ./build && tsc",
     "database:migrate": "prisma migrate deploy --schema=./prisma/schema.prisma",
     "database:migrate:cd": "dotenv -e /env/.env-cd -- prisma migrate deploy --schema=./prisma/schema.prisma",
     "database:migration:generate": "dotenv -e .env -- npx prisma migrate dev --schema=./prisma/schema.prisma --name",
+    "prisma:generate": "npx prisma generate --schema=./prisma/schema.prisma",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "start": "npm run build && node build/index.js",
