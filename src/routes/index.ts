@@ -47,6 +47,7 @@ router.post('/service/create', async (req: express.Request, res: express.Respons
 });
 
 router.get('/service/list', async (req: express.Request, res: express.Response) => {
+  res.header("Access-Control-Allow-Origin", "*");
   try {
     const services = await serviceRepository.getAll();
 
