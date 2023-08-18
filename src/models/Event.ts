@@ -13,7 +13,7 @@ export class Event implements ModelInterface {
   public createdAt: Date;
   public updatedAt: Date;
 
-  constructor(name: string, time: Date, status: string, service: string, message?: string, createdAt?: Date) {
+  constructor(name: string, time: Date, status: string, service: string, message?: string, createdAt?: Date, updatedAt?: Date) {
     this.id = uuidv4();
     this.name = name;
     this.time = time;
@@ -21,7 +21,7 @@ export class Event implements ModelInterface {
     this.message = message;
     this.service = service;
     this.createdAt = createdAt ? createdAt : new Date();
-    this.updatedAt = new Date('dd-MM-yy hh:mm:ss');
+    this.updatedAt = updatedAt ? updatedAt : new Date();
   }
 
   toJson(): EventType | null {

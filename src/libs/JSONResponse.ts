@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { EventType } from '../type/EventType';
 
 export class JSONResponse {
-  static success(req: Request, res: Response, message: string, data: EventType | null) {
+  static success(req: Request, res: Response, message: string, data: any | null) {
     res.status(200).json({
       code: 200,
       message: message || 'success',

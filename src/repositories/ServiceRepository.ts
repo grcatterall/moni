@@ -37,4 +37,14 @@ export class ServiceRepository implements RepositoryInterface<Services> {
   public async getAll(): Promise<Services[]> {
     return await this.prismaClient.services.findMany();
   }
+
+  public async getAllWithEvents(): Promise<Services[]> {
+    return await this.prismaClient.services.findMany(
+      {
+        include: {
+          Events: true
+        }
+      }
+    );
+  }
 }

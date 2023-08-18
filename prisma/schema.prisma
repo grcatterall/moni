@@ -15,14 +15,14 @@ model Events {
   id        String   @id @default(uuid())
   name      String
   message   String
-  service   Services @relation(fields: [serviceId], references: [name])
+  service   Services @relation(fields: [serviceId], references: [id])
   serviceId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Services {
-  id        String   @id @default(uuid())
+  id        String   @id @default(uuid()) @unique
   name      String   @unique
   Events    Events[]
   createdAt DateTime @default(now())
