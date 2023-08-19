@@ -27,4 +27,14 @@ export class EventRepository implements RepositoryInterface<Events> {
     
         return prismaEvent;
     }
+
+    public async getByServiceId(serviceId: any): Promise<Events[] | null> {
+        const prismaEvent = await this.prismaClient.events.findMany({
+            where: {
+                serviceId: serviceId
+            }
+        });
+    
+        return prismaEvent;
+    }
 }
